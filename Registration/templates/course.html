@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #ffffff;
+            margin: 0 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #2980b9;
+        }
+        table {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+        th {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Kolej Professional MARA Indera Mahkota</h1>
+        <h2>Course</h2>
+        <form action="save_update_course/{{data.code}}" method="post">
+            {% csrf_token %}
+            <label for="code">Course Code</label>
+            <input type="text" id="code" name="code" placeholder="Enter course code">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Enter course description">
+            <input type="submit" value="SAVE">
+            <a href="{% url 'index' %}">HOMEPAGE</a>
+            <a href="{% url 'mentor' %}">Insert Mentor</a>
+        </form>
+        {{message}}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Update?</th>
+                <th>Delete?</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for x in allcourse %}
+            <tr>
+                <td>{{ x.code }}</td>
+                <td>{{ x.description }}</td>
+                <td><a href = 'update_course/{{x.code}}'> Update </a></td>
+                <td><a href = 'delete_course/{{x.code}}'> Delete </a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> ``
+
+</body>
+</html>
